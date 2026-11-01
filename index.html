@@ -1,0 +1,568 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TechPulse brings you helpful technology guides, smartphone tips, app tutorials and the latest tech knowledge.">
+  <meta name="keywords" content="technology, smartphones, tech tips, apps, computers, tutorials">
+  <meta name="author" content="TechPulse">
+  <meta name="robots" content="index, follow">
+  <title>TechPulse | Technology Made Simple</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:Arial,Helvetica,sans-serif;
+      background:#080d18;
+      color:#e8edf7;
+      line-height:1.7;
+    }
+    a { color:inherit; text-decoration:none; }
+    button,input,textarea { font:inherit; }
+    .container { width:min(1100px,92%); margin:auto; }
+    header {
+      background:#101827;
+      border-bottom:1px solid #263247;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+    nav {
+      min-height:72px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+    }
+    .logo { font-size:25px; font-weight:800; color:#fff; }
+    .logo span { color:#38bdf8; }
+    .nav-links { display:flex; gap:22px; flex-wrap:wrap; }
+    .nav-links a { color:#c6d0e0; font-size:14px; }
+    .nav-links a:hover { color:#38bdf8; }
+    .hero {
+      padding:85px 0;
+      text-align:center;
+      background:radial-gradient(ellipse at top,#18345a 0%,#080d18 65%);
+    }
+    .tag {
+      display:inline-block;
+      color:#38bdf8;
+      border:1px solid #245879;
+      background:#10243a;
+      padding:5px 13px;
+      border-radius:30px;
+      font-size:13px;
+      margin-bottom:18px;
+    }
+    h1 { font-size:clamp(35px,6vw,58px); line-height:1.15; }
+    .hero p {
+      max-width:650px;
+      margin:18px auto 25px;
+      color:#aebbd0;
+    }
+    .btn {
+      display:inline-block;
+      background:#0ea5e9;
+      color:#06111d;
+      border:0;
+      padding:12px 22px;
+      border-radius:8px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    .btn:hover { background:#38bdf8; }
+    .section { padding:55px 0; }
+    .section-heading { margin-bottom:25px; }
+    .section-heading h2 { font-size:29px; }
+    .section-heading p { color:#9eacc1; }
+    .stats {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+      margin-top:30px;
+    }
+    .stat {
+      background:#111c2c;
+      border:1px solid #26364d;
+      padding:18px;
+      border-radius:12px;
+      text-align:center;
+    }
+    .stat strong { display:block; color:#38bdf8; font-size:25px; }
+    .toolbar {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:25px;
+    }
+    .toolbar input {
+      flex:1;
+      min-width:220px;
+      background:#111c2c;
+      border:1px solid #30415a;
+      color:white;
+      padding:12px 14px;
+      border-radius:8px;
+      outline:none;
+    }
+    .filters { display:flex; gap:8px; flex-wrap:wrap; }
+    .filter {
+      padding:9px 14px;
+      background:#172438;
+      color:#dce7f6;
+      border:1px solid #30415a;
+      border-radius:7px;
+      cursor:pointer;
+    }
+    .filter.active,.filter:hover {
+      background:#0ea5e9;
+      color:#06111d;
+    }
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+    .article-card {
+      background:#111c2c;
+      border:1px solid #293950;
+      border-radius:13px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .article-art {
+      height:145px;
+      display:grid;
+      place-items:center;
+      font-size:48px;
+      background:linear-gradient(135deg,#123453,#17213a);
+    }
+    .card-content { padding:19px; display:flex; flex-direction:column; flex:1; }
+    .category {
+      color:#38bdf8;
+      text-transform:uppercase;
+      font-size:11px;
+      letter-spacing:1px;
+      font-weight:bold;
+    }
+    .card-content h3 { margin:8px 0; font-size:19px; }
+    .card-content p { color:#aab7ca; font-size:14px; margin-bottom:18px; }
+    .card-content button { margin-top:auto; align-self:flex-start; }
+    .page { display:none; min-height:65vh; padding:55px 0; }
+    .page.active { display:block; }
+    .article-body {
+      max-width:800px;
+      margin:auto;
+      background:#111c2c;
+      border:1px solid #293950;
+      border-radius:13px;
+      padding:30px;
+    }
+    .article-body h1 { font-size:34px; margin:12px 0 20px; }
+    .article-body h2 { margin:25px 0 8px; font-size:22px; }
+    .article-body p { color:#c0ccdc; margin-bottom:15px; }
+    .article-body ul { margin:10px 0 20px 22px; color:#c0ccdc; }
+    .back { margin-bottom:25px; }
+    .info-box {
+      background:#10243a;
+      border-left:3px solid #38bdf8;
+      padding:15px;
+      margin:20px 0;
+      border-radius:5px;
+    }
+    .form {
+      max-width:650px;
+      display:grid;
+      gap:14px;
+      margin-top:20px;
+    }
+    .form input,.form textarea {
+      width:100%;
+      background:#111c2c;
+      border:1px solid #30415a;
+      color:white;
+      padding:13px;
+      border-radius:8px;
+      outline:none;
+    }
+    .form textarea { min-height:140px; resize:vertical; }
+    .form label { font-size:14px; color:#c6d0e0; }
+    .email-link { color:#38bdf8; }
+    footer {
+      background:#101827;
+      border-top:1px solid #263247;
+      padding:35px 0;
+      margin-top:40px;
+    }
+    .footer-inner {
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:20px;
+    }
+    .footer-links { display:flex; gap:16px; flex-wrap:wrap; }
+    .footer-links a { color:#aebbd0; font-size:13px; }
+    .muted { color:#9eacc1; }
+    @media(max-width:800px) {
+      .grid { grid-template-columns:repeat(2,1fr); }
+      .nav-links { gap:12px; }
+    }
+    @media(max-width:560px) {
+      nav { padding:14px 0; align-items:flex-start; flex-direction:column; }
+      .grid { grid-template-columns:1fr; }
+      .stats { grid-template-columns:1fr; }
+      .hero { padding:65px 0; }
+      .article-body { padding:20px; }
+      .article-body h1 { font-size:28px; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#" onclick="showPage('home');return false;">Tech<span>Pulse</span></a>
+      <div class="nav-links">
+        <a href="#" onclick="showPage('home');return false;">Home</a>
+        <a href="#articles" onclick="showPage('home');">Articles</a>
+        <a href="#" onclick="showPage('about');return false;">About</a>
+        <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div id="home" class="page active">
+    <section class="hero">
+      <div class="container">
+        <span class="tag">WELCOME TO TECHPULSE</span>
+        <h1>Technology Made<br><span style="color:#38bdf8">Simple for Everyone.</span></h1>
+        <p>Discover useful technology guides, smartphone tips, app tutorials and easy explanations to help you stay updated in the digital world.</p>
+        <a class="btn" href="#articles">Explore Articles</a>
+        <div class="stats">
+          <div class="stat"><strong>Tech</strong><span class="muted">Helpful Guides</span></div>
+          <div class="stat"><strong>Tips</strong><span class="muted">Practical Advice</span></div>
+          <div class="stat"><strong>Learn</strong><span class="muted">Every Day</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="articles">
+      <div class="section-heading">
+        <h2>Latest Articles</h2>
+        <p>Explore our technology guides and tutorials.</p>
+      </div>
+
+      <div class="toolbar">
+        <input id="searchInput" type="search" placeholder="Search articles..." oninput="renderArticles()">
+      </div>
+      <div class="filters">
+        <button class="filter active" onclick="setCategory('all',this)">All</button>
+        <button class="filter" onclick="setCategory('phones',this)">Smartphones</button>
+        <button class="filter" onclick="setCategory('computing',this)">Computing</button>
+        <button class="filter" onclick="setCategory('safety',this)">Security</button>
+        <button class="filter" onclick="setCategory('apps',this)">Apps</button>
+      </div>
+      <br>
+      <div class="grid" id="articleGrid"></div>
+      <p id="noResults" class="muted" style="display:none;margin-top:20px;">No matching articles found.</p>
+    </section>
+  </div>
+
+  <section id="articlePage" class="page">
+    <div class="container">
+      <button class="btn back" onclick="showPage('home')">← Back to Articles</button>
+      <div class="article-body" id="articleContent"></div>
+    </div>
+  </section>
+
+  <section id="about" class="page">
+    <div class="container">
+      <div class="article-body">
+        <span class="tag">ABOUT US</span>
+        <h1>About TechPulse</h1>
+        <p>Welcome to TechPulse, a technology blog created to make technology easier to understand.</p>
+        <p>Our goal is to publish helpful guides, practical tips and educational articles about smartphones, computers, applications and digital safety.</p>
+        <h2>Our Mission</h2>
+        <p>We want to make useful technology information accessible to everyone through clear and easy-to-understand content.</p>
+        <h2>Get in Touch</h2>
+        <p>Have a question or suggestion? Visit our <a class="email-link" href="#" onclick="showPage('contact');return false;">Contact page</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="page">
+    <div class="container">
+      <div class="article-body">
+        <span class="tag">CONTACT</span>
+        <h1>Contact Us</h1>
+        <p>Have a question, suggestion or feedback? We'd love to hear from you.</p>
+        <p>Email: <a class="email-link" href="mailto:malikadeel9942@gmail.com">malikadeel9942@gmail.com</a></p>
+
+        <form class="form" onsubmit="sendMessage(event)">
+          <label for="name">Your Name</label>
+          <input id="name" type="text" placeholder="Enter your name" required>
+
+          <label for="email">Your Email</label>
+          <input id="email" type="email" placeholder="Enter your email address" required>
+
+          <label for="message">Your Message</label>
+          <textarea id="message" placeholder="Write your message..." required></textarea>
+
+          <button class="btn" type="submit">Send Message</button>
+        </form>
+        <p class="muted" style="font-size:13px;margin-top:15px;">Submitting this form opens your email application to send your message.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" class="page">
+    <div class="container">
+      <div class="article-body">
+        <h1>Privacy Policy</h1>
+        <p><strong>Last updated: November 2026</strong></p>
+        <p>TechPulse respects the privacy of its visitors. This page explains general information about how our website may handle visitor information.</p>
+        <h2>Information You Provide</h2>
+        <p>If you contact us by email, we may receive the information you choose to include in your message.</p>
+        <h2>Cookies and Advertising</h2>
+        <p>Our website may use cookies or similar technologies if analytics or advertising services are added. Third-party advertising providers may use cookies to display relevant advertisements.</p>
+        <h2>Third-Party Services</h2>
+        <p>External services and websites have their own privacy policies. Please review their policies when using those services.</p>
+        <h2>Contact</h2>
+        <p>For privacy questions, email <a class="email-link" href="mailto:malikadeel9942@gmail.com">malikadeel9942@gmail.com</a>.</p>
+        <div class="info-box">This is a starter policy. Update it to accurately describe the services, cookies, analytics and advertising actually used on your website before publishing it as your final policy.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="terms" class="page">
+    <div class="container">
+      <div class="article-body">
+        <h1>Terms and Conditions</h1>
+        <p><strong>Last updated: November 2026</strong></p>
+        <p>By using TechPulse, you agree to use this website responsibly and in accordance with applicable laws.</p>
+        <h2>Website Content</h2>
+        <p>Articles are provided for general informational and educational purposes. Always verify important technical information before making decisions.</p>
+        <h2>Acceptable Use</h2>
+        <p>You must not misuse the website, attempt to disrupt its operation or use its content for unlawful purposes.</p>
+        <h2>External Links</h2>
+        <p>Our website may link to external websites. We are not responsible for their content or practices.</p>
+        <h2>Changes</h2>
+        <p>We may update these terms when necessary. Continued use of the website means you accept the updated terms.</p>
+        <h2>Contact</h2>
+        <p>Questions? Email <a class="email-link" href="mailto:malikadeel9942@gmail.com">malikadeel9942@gmail.com</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <a class="logo" href="#" onclick="showPage('home');return false;">Tech<span>Pulse</span></a>
+      <p class="muted">Technology made simple for everyone.</p>
+      <p class="muted">© <span id="year"></span> TechPulse. All rights reserved.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('about');return false;">About</a>
+      <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>
+      <a href="#" onclick="showPage('terms');return false;">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const articles = [
+  {
+    id:1, category:"phones", icon:"📱",
+    title:"10 Practical Ways to Improve Your Smartphone Battery Life",
+    description:"Learn simple settings and habits that can help your phone battery last longer.",
+    content:`
+      <p>Your smartphone battery is important for everyday use. A few sensible settings can help reduce unnecessary battery consumption.</p>
+      <h2>1. Reduce Screen Brightness</h2>
+      <p>The display can use a significant amount of battery. Use automatic brightness or adjust it to a comfortable level.</p>
+      <h2>2. Use Battery Saver</h2>
+      <p>Battery Saver or Low Power Mode can limit some background activity when your battery is running low.</p>
+      <h2>3. Review Background Activity</h2>
+      <p>Check which applications use the most battery and restrict unnecessary background activity where appropriate.</p>
+      <h2>4. Keep Your Software Updated</h2>
+      <p>System updates can include performance improvements and bug fixes. Install updates from official sources.</p>
+      <h2>5. Manage Notifications</h2>
+      <p>Turn off notifications that you do not need. This can reduce unnecessary screen activity.</p>
+      <h2>Conclusion</h2>
+      <p>Small changes to brightness, background activity and notifications can make everyday battery use more efficient.</p>`
+  },
+  {
+    id:2, category:"computing", icon:"💻",
+    title:"SSD vs HDD: What Is the Difference?",
+    description:"Understand the differences between two common computer storage technologies.",
+    content:`
+      <p>SSD and HDD are two types of storage devices used in computers. Both store your files, applications and operating system, but they work differently.</p>
+      <h2>What Is an HDD?</h2>
+      <p>A Hard Disk Drive stores data on rotating magnetic disks. It is available in large capacities and can be useful for storing lots of files.</p>
+      <h2>What Is an SSD?</h2>
+      <p>A Solid State Drive uses flash memory and has no moving mechanical parts. It generally offers much faster loading and boot times.</p>
+      <h2>Speed and Everyday Use</h2>
+      <p>Computers with SSD storage usually start faster and open applications more quickly than similar computers with traditional HDD storage.</p>
+      <h2>Which One Should You Choose?</h2>
+      <p>An SSD is a strong choice for an operating system and everyday applications. An HDD may still be useful for extra storage at a lower cost per gigabyte.</p>
+      <h2>Conclusion</h2>
+      <p>For most everyday computer users, an SSD provides a noticeable improvement in responsiveness.</p>`
+  },
+  {
+    id:3, category:"safety", icon:"🔐",
+    title:"How to Create Stronger Passwords and Protect Your Accounts",
+    description:"Learn basic password security habits for your online accounts.",
+    content:`
+      <p>Strong account security starts with good password habits. A weak or reused password can put multiple accounts at risk.</p>
+      <h2>Use Unique Passwords</h2>
+      <p>Avoid using the same password across different websites. If one service is compromised, unique passwords help protect your other accounts.</p>
+      <h2>Make Passwords Long</h2>
+      <p>Long passwords or passphrases are generally harder to guess. Use a different one for each important account.</p>
+      <h2>Use a Password Manager</h2>
+      <p>A reputable password manager can help generate and store unique passwords securely.</p>
+      <h2>Enable Two-Factor Authentication</h2>
+      <p>Where available, enable two-factor authentication for an additional layer of account protection.</p>
+      <h2>Watch Out for Suspicious Links</h2>
+      <p>Do not enter your password after following unexpected links in messages. Visit the official website or app directly.</p>
+      <h2>Conclusion</h2>
+      <p>Unique passwords, two-factor authentication and careful browsing can improve your online security.</p>`
+  },
+  {
+    id:4, category:"apps", icon:"📲",
+    title:"Simple Ways to Organise Apps on Your Smartphone",
+    description:"Make your phone easier to use with a cleaner and more organised home screen.",
+    content:`
+      <p>A well-organised home screen makes it easier to find the applications you use every day.</p>
+      <h2>Create Useful Folders</h2>
+      <p>Group similar apps together, such as communication, entertainment, finance and productivity.</p>
+      <h2>Keep Important Apps Accessible</h2>
+      <p>Place your most frequently used applications on the first screen or dock.</p>
+      <h2>Remove Apps You Do Not Use</h2>
+      <p>Review installed applications occasionally. Uninstall apps you no longer need, where appropriate.</p>
+      <h2>Use Widgets Carefully</h2>
+      <p>Widgets can provide useful information, but too many can make the home screen cluttered.</p>
+      <h2>Conclusion</h2>
+      <p>A simple layout with useful folders can make your smartphone easier to navigate.</p>`
+  },
+  {
+    id:5, category:"phones", icon:"🛒",
+    title:"What to Check Before Buying a Smartphone",
+    description:"A practical checklist to help you compare phones before making a purchase.",
+    content:`
+      <p>Choosing a smartphone is easier when you compare the features that matter for your daily use rather than focusing on one specification.</p>
+      <h2>Performance</h2>
+      <p>Check the processor, memory and real-world performance reviews for the tasks you plan to do.</p>
+      <h2>Battery</h2>
+      <p>Look for reliable battery-life tests and consider how quickly the phone charges.</p>
+      <h2>Camera</h2>
+      <p>Compare sample photos and video quality in different lighting conditions.</p>
+      <h2>Software Support</h2>
+      <p>Check how long the manufacturer promises security and operating system updates.</p>
+      <h2>Storage</h2>
+      <p>Choose enough storage for your applications, photos and videos. Check whether expandable storage is supported if you need it.</p>
+      <h2>Conclusion</h2>
+      <p>Compare the complete package, including price, support, battery, camera and performance.</p>`
+  },
+  {
+    id:6, category:"computing", icon:"☁️",
+    title:"What Is Cloud Storage and How Does It Work?",
+    description:"A beginner-friendly explanation of storing files online.",
+    content:`
+      <p>Cloud storage lets you save files on remote computer servers and access them through the internet.</p>
+      <h2>How Does It Work?</h2>
+      <p>When you upload a file, it is transferred to a service provider's storage system. You can access it later using supported devices and an internet connection.</p>
+      <h2>Why Is It Useful?</h2>
+      <p>Cloud storage can make it easier to access documents, photos and other files from multiple devices.</p>
+      <h2>Keep Your Account Secure</h2>
+      <p>Use a strong unique password and enable two-factor authentication where available.</p>
+      <h2>Understand Storage Limits</h2>
+      <p>Free plans usually have storage limits. Check the provider's pricing and terms before choosing a paid plan.</p>
+      <h2>Conclusion</h2>
+      <p>Cloud storage is useful for accessing files across devices, but always understand the service's privacy and backup features.</p>`
+  }
+];
+
+let selectedCategory = "all";
+
+function renderArticles() {
+  const grid = document.getElementById("articleGrid");
+  const search = document.getElementById("searchInput").value.toLowerCase();
+
+  const filtered = articles.filter(article => {
+    const matchesCategory = selectedCategory === "all" || article.category === selectedCategory;
+    const matchesSearch = (article.title + " " + article.description).toLowerCase().includes(search);
+    return matchesCategory && matchesSearch;
+  });
+
+  grid.innerHTML = filtered.map(article => `
+    <article class="article-card">
+      <div class="article-art">${article.icon}</div>
+      <div class="card-content">
+        <span class="category">${article.category}</span>
+        <h3>${article.title}</h3>
+        <p>${article.description}</p>
+        <button class="btn" onclick="openArticle(${article.id})">Read Full Article →</button>
+      </div>
+    </article>
+  `).join("");
+
+  document.getElementById("noResults").style.display = filtered.length ? "none" : "block";
+}
+
+function setCategory(category, button) {
+  selectedCategory = category;
+  document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+  button.classList.add("active");
+  renderArticles();
+}
+
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+  const page = document.getElementById(pageId);
+  if (page) page.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openArticle(id) {
+  const article = articles.find(item => item.id === id);
+  if (!article) return;
+
+  document.getElementById("articleContent").innerHTML = `
+    <span class="category">${article.category}</span>
+    <h1>${article.icon} ${article.title}</h1>
+    <p class="muted">${article.description}</p>
+    <hr style="border-color:#30415a;margin:20px 0;">
+    ${article.content}
+    <div class="info-box">Thank you for reading TechPulse. Explore our other technology guides for more helpful information.</div>
+  `;
+  showPage("articlePage");
+}
+
+function sendMessage(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const sender = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  const subject = encodeURIComponent("TechPulse Contact Form Message");
+  const body = encodeURIComponent(
+    "Name: " + name + "\nEmail: " + sender + "\n\nMessage:\n" + message
+  );
+
+  window.location.href =
+    "mailto:malikadeel9942@gmail.com?subject=" + subject + "&body=" + body;
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderArticles();
+</script>
+</body>
+</html>
